@@ -1,10 +1,12 @@
-FROM arm32v7/python:3.7-slim-buster
+FROM arm32v7/python:3.9 AS py39builder
+RUN mkdir /install
+WORKDIR /install
+COPY app/requirements.txt .
+RUN pip install --prefix=/install -r requirements.txt
 
-RUN apt-get update && apt-get install -y apt-utils python-dev python3-dev build-essential pkg-config
-RUN pip3 install RPi.GPIO configparser paho-mqtt
 
-RUN mkdir app
-
+FROM arm32v7/python:3.9-slim
+COPY --from=py39builder /install /usr/local
 COPY /app /app
 WORKDIR /app
-CMD ["python", "./pir.py"]
+CMD ["python", "app.py"]
