@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  pir-mqtt:
+    build: .
+    image: pir-mqtt
+    container_name: pir-mqtt
+    privileged: true
+    restart: unless-stopped
+    environment:
+      GPIO_PIN: 7
+      SCAN_INTERVAL: 100
+      SENSOR_NAME: 'pir'
+      MQTT_HOST: localhost
+      MQTT_USER: ''
+      MQTT_PASS: ''
