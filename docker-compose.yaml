@@ -11,6 +11,13 @@ services:
       GPIO_PIN: 7
       SCAN_INTERVAL: 100
       SENSOR_NAME: 'pir'
-      MQTT_HOST: localhost
-      MQTT_USER: ''
-      MQTT_PASS: ''
+      MQTT_HOSTNAME: localhost
+      MQTT_PORT: 1883
+      MQTT_TIMEOUT: 60
+      MQTT_CLIENT_ID: 'pir-sensor-mqtt'
+      CLIENT_CLEAN_SESSION: 'False'
+      CLIENT_TLS_INSECURE: 'False'
+      MQTT_CLIENT_QOS: '4'
+      MQTT_USERNAME: ''
+      MQTT_PASSWORD: ''
+      LOG_LEVEL: 'info'
