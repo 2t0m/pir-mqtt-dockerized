@@ -2,8 +2,9 @@ version: '3.3'
 services:
   pir-mqtt:
     build: .
-    image: pir-mqtt
-    container_name: pir-mqtt
+    image: pir-mqtt-dockerized
+    container_name: pir-mqtt-dockerized
+    network_mode: host
     privileged: true
     restart: unless-stopped
     environment:
