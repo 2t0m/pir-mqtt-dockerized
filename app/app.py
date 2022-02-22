@@ -67,8 +67,6 @@ client.loop_start()
 pir_data_conf = {"name": "PIR Sensor", "unique_id": SENSOR_NAME, "device_class": "motion", "state_topic": MQTT_STATE}
 
 logging.info("Publishing default to config "+MQTT_CONFIG+" and state "+MQTT_STATE)
-client.publish(MQTT_CONFIG, json.dumps(pir_data_conf))
-client.publish(MQTT_STATE, "OFF")
 
 def motion_detected(channel):
     logging.info('Motion On')
@@ -83,7 +81,8 @@ logging.info("Successfully initialized application! Let's try to read the sensor
 try:
     GPIO.add_event_detect(PIN, GPIO.RISING, callback=motion_detected, bouncetime=300)
     while True:
-        time.sleep(1)
+        client.publish(MQTT_CONFIG, json.dumps(pir_data_conf))
+        time.sleep(10)
 except Exception as e:
         logging.error(f"Something went wrong and this shouldn't happen... Details: {e}")
 
